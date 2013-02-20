@@ -21,10 +21,26 @@
 
   <body>
 
+    <form id="search-form-bing" class="form-search">
+      <input type="text" class="input-xlarge search-query" placeholder="Search Bing">
+      <button type="submit" class="btn">Search</button>
+    </form>
+
+    <hr>
+
     <div class="container">
-      <div id="design"></div>
+      <div>
+        <h1>Designer News</h1>
+        <div id="design"></div>
+      </div>
+      <div>
+        <h1>Macrumors</h1>
       <div id="mac"></div>
-      <div id="news"></div>
+      </div>
+      <div>
+        <h1>New York Times</h1>
+        <div id="news"></div>
+      </div>
     </div> <!-- /container -->
 
     <!-- Le javascript
@@ -34,6 +50,14 @@
     <script src="assets/js/jquery.rss.js" type="text/javascript" charset="utf-8"></script>
     <script>
       jQuery(function($) {
+        $("#search-form-bing").submit(function(){
+          // Get the value of the search field, paramaterize it, append it to the URL
+          var searchQuery = $("#search-form-bing .search-query:first").val();
+          var params = { q:searchQuery };
+          var searchString = jQuery.param(params);
+          location.href = "http://www.bing.com/search?" + searchString;
+          return false;
+        }),
         $("#design").rss("https://news.layervault.com/?format=rss", {
           limit: 5,
           entryTemplate: '<li><a href="{url}">{title}</a></li>'
@@ -45,7 +69,7 @@
         $("#news").rss("http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml", {
           limit: 5,
           entryTemplate: '<li><a href="{url}">{title}</a></li>'
-        })
+        });
       })
     </script>
 
