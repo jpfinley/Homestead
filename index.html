@@ -22,25 +22,32 @@
   <body>
 
     <div class="container">
-      <div id="feeds">
-        <div id="Flickr" class="tmi-feed">
-          <h2>flickr</h2>
-        </div>
-        <div id="tweets" class="tmi-feed">
-          <h2>Twitter Feed</h2>
-        </div>
-        <div id="greader" class="tmi-feed">
-          <h2>Google Reader Shared Items</h2>
-        </div>
-      </div>
+      <div id="design"></div>
+      <div id="mac"></div>
+      <div id="news"></div>
     </div> <!-- /container -->
 
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <!-- <script src="../assets/js/jquery.js"></script> -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.1.0/prototype.js" charset="utf-8"></script>
-    <script src="assets/js/tmi.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/js/jquery.rss.js" type="text/javascript" charset="utf-8"></script>
+    <script>
+      jQuery(function($) {
+        $("#design").rss("https://news.layervault.com/?format=rss", {
+          limit: 5,
+          entryTemplate: '<li><a href="{url}">{title}</a></li>'
+        }),
+        $("#mac").rss("http://feeds.macrumors.com/MacRumors-All", {
+          limit: 5,
+          entryTemplate: '<li><a href="{url}">{title}</a></li>'
+        }),
+        $("#news").rss("http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml", {
+          limit: 5,
+          entryTemplate: '<li><a href="{url}">{title}</a></li>'
+        })
+      })
+    </script>
 
   </body>
 </html>
