@@ -21,10 +21,24 @@
 
   <body>
 
-    <form id="search-form-bing" class="form-search">
-      <input type="text" class="input-xlarge search-query" placeholder="Search Bing">
-      <button type="submit" class="btn">Search</button>
-    </form>
+      <ul class="nav nav-tabs">
+        <li><a href="#tab1" data-toggle="tab">Bing</a></li>
+        <li><a href="#tab2" data-toggle="tab">Google Maps</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab1">
+          <form id="search-form-bing" class="form-search">
+            <input type="text" class="input-xlarge search-query" placeholder="Search Bing">
+            <button type="submit" class="btn">Search</button>
+          </form>
+        </div>
+        <div class="tab-pane" id="tab2">
+          <form id="search-form-maps" class="form-search">
+            <input type="text" class="input-xlarge search-query" placeholder="Search Google Maps">
+            <button type="submit" class="btn">Search</button>
+          </form>
+        </div>
+      </div>
 
     <hr>
 
@@ -47,6 +61,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="assets/js/jquery-1.9.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="assets/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="assets/js/jquery.rss.js" type="text/javascript" charset="utf-8"></script>
     <script>
       jQuery(function($) {
@@ -56,6 +71,14 @@
           var params = { q:searchQuery };
           var searchString = jQuery.param(params);
           location.href = "http://www.bing.com/search?" + searchString;
+          return false;
+        }),
+        $("#search-form-maps").submit(function(){
+          // Get the value of the search field, paramaterize it, append it to the URL
+          var searchQuery = $("#search-form-maps .search-query:first").val();
+          var params = { q:searchQuery };
+          var searchString = jQuery.param(params);
+          location.href = "https://maps.google.com/maps?" + searchString;
           return false;
         }),
         $("#design").rss("https://news.layervault.com/?format=rss", {
