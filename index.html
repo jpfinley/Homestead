@@ -9,8 +9,24 @@
 
     <!-- Le styles -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/main.css" rel="stylesheet">
     <link href="assets/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <script>
+    <!--
+    // Get the current hour. Load a stylesheet based on the time of day.
+    function getStylesheet() {
+      var currentTime = new Date().getHours();
+      if (8 <= currentTime && currentTime < 20) {
+        document.write("<link href='assets/css/day.css' rel='stylesheet'>");
+      }
+      if (20 <= currentTime && currentTime < 8) {
+        document.write("<link href='assets/css/night.css' rel='stylesheet'>");
+      }
+    }
+    getStylesheet();
+    -->
+    </script>
+    <!-- if no javascript, load this one -->
+    <noscript><link href="assets/css/day.css" rel="stylesheet"></noscript>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
