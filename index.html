@@ -69,22 +69,6 @@
     <script src="assets/js/jquery.rss.js" type="text/javascript" charset="utf-8"></script>
     <script>
       jQuery(function($) {
-        $("#search-form-bing").submit(function(){
-          // Get the value of the search field, paramaterize it, append it to the URL
-          var searchQuery = $("#search-form-bing .search-query:first").val();
-          var params = { q:searchQuery };
-          var searchString = jQuery.param(params);
-          location.href = "http://www.bing.com/search?" + searchString;
-          return false;
-        }),
-        $("#search-form-maps").submit(function(){
-          // Get the value of the search field, paramaterize it, append it to the URL
-          var searchQuery = $("#search-form-maps .search-query:first").val();
-          var params = { q:searchQuery };
-          var searchString = jQuery.param(params);
-          location.href = "https://maps.google.com/maps?" + searchString;
-          return false;
-        }),
         $("#design").rss("https://news.layervault.com/?format=rss", {
           limit: 5,
           entryTemplate: '<li><a href="{url}">{title}</a></li>'
