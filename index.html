@@ -37,29 +37,14 @@
 
   <body>
     <div class="container">
+      
       <div class="row">
-        <div class="span5 offset4">
-          <ul class="nav nav-tabs">
-            <li class="active"><a href="#tab1" data-toggle="tab">Bing</a></li>
-            <li><a href="#tab2" data-toggle="tab">Google Maps</a></li>
-          </ul>
-          <div class="tab-content">
-            <div class="tab-pane active" id="tab1">
-              <form id="search-form-bing" class="form-search">
-                <input type="text" class="input-xlarge search-query" placeholder="Search Bing">
-                <button type="submit" class="btn">Search</button>
-              </form>
-            </div>
-            <div class="tab-pane" id="tab2">
-              <form id="search-form-maps" class="form-search">
-                <input type="text" class="input-xlarge search-query" placeholder="Search Google Maps">
-                <button type="submit" class="btn">Search</button>
-              </form>
-            </div>
-          </div>
+        <div class="span4 muted">
+          <span id="bitcoin">Bitcoin Market Price: $</span>
         </div>
       </div>
-      <div class="row">
+      
+      <div id="feeds" class="row">
         <div class="span4">
           <h1>Designer News</h1>
           <div id="design"></div>
@@ -73,6 +58,7 @@
           <div id="news"></div>
         </div>
       </div>
+      
     </div> <!-- /container -->
 
     <!-- Le javascript
@@ -110,6 +96,12 @@
         $("#news").rss("http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml", {
           limit: 5,
           entryTemplate: '<li><a href="{url}">{title}</a></li>'
+        }),
+        $.getJSON('https://blockchain.info/stats?format=json', function(data) {
+          $("#bitcoin").append(data.market_price_usd);
+          if (data.market_price_usd <= 50) {
+            $("#bitcoin").addClass("alert alert-success");
+          }
         });
       })
     </script>
